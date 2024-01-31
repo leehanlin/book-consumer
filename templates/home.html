@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Library</title>
+    <style>
+        body {
+            background: url('static/background.png') center center fixed;
+            background-size: cover;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            text-align: center;
+            max-width: 400px; /* Adjust the width as needed */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="/">
+        <h1>Virtual Library</h1>
+        <label for="id">ID:</label>
+        <input type="text" name="id" id="id">
+
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title">
+
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author">
+
+        <label for="publication_year">Publication Year:</label>
+        <input type="text" name="publication_year" id="publication_year">
+
+        <label for="genre">Genre:</label>
+        <input type="text" name="genre" id="genre">
+
+        <button type="submit">Filter Books</button>
+    </form>
+</body>
+</html>

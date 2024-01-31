@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Library</title>
+    <style>
+        body {
+            background-image: url(static/background.png);
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .content-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            width: 60%;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 100px; /* To accommodate search inputs */
+        }
+
+        .search-container {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .book-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .book-title {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .book-details {
+            font-size: 16px;
+            color: #666;
+        }
+
+        input[type="text"] {
+            margin: 0 5px;
+            padding: 8px;
+        }
+
+        .info-message {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <input type="text" id="titleSearch" oninput="advancedSearch()" placeholder="Search by title...">
+        <input type="text" id="authorSearch" oninput="advancedSearch()" placeholder="Search by author...">
+        <input type="text" id="yearSearch" oninput="advancedSearch()" placeholder="Search by year...">
+        <input type="text" id="genreSearch" oninput="advancedSearch()" placeholder="Search by genre...">
+    </div>
+
+    <div class="content-container">
+        <p class="info-message">The filters above only narrow down the results on this page. They do not call on the entire database from the API.</p>
+        <div id="bookList">
+            {% for book in books %}
+                <div class="book-item" data-title="{{ book.title }}" data-author="{{ book.author }}" data-year="{{ book.publication_year }}" data-genre="{{ book.genre }}">
+                    <strong>{{ book.title }}</strong> by {{ book.author }} ({{ book.publication_year }}) - {{ book.genre }}
+                </div>
+            {% endfor %}
+        </div>
+        <center><button class="back-button" onclick="window.location='/'">Back to Home</button></center>
+    </div>
+
+    <script>
+        function advancedSearch() {
+            var titleInput = document.getElementById("titleSearch").value.toUpperCase();
+            var authorInput = document.getElementById("authorSearch").value.toUpperCase();
+            var yearInput = document.getElementById("yearSearch").value.toUpperCase();
+            var genreInput = document.getElementById("genreSearch").value.toUpperCase();
+            var books = document.getElementById("bookList").getElementsByClassName("book-item");
+
+            for (var i = 0; i < books.length; i++) {
+                var title = books[i].getAttribute("data-title").toUpperCase();
+                var author = books[i].getAttribute("data-author").toUpperCase();
+                var year = books[i].getAttribute("data-year").toUpperCase();
+                var genre = books[i].getAttribute("data-genre").toUpperCase();
+
+                var isVisible = title.includes(titleInput) && author.includes(authorInput) && year.includes(yearInput) && genre.includes(genreInput);
+                books[i].style.display = isVisible ? "" : "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
